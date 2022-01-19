@@ -1,5 +1,6 @@
 <template>
   <div class="api-getter">
+    <GenderDistributionInfo :men-count="menCount" :women-count="womenCount"/>
     <SinglePerson v-for="person in peopleData"
                   :key="person.url"
                   :person-data="person"/>
@@ -9,10 +10,11 @@
 <script>
   import { mapState } from 'vuex';
   import SinglePerson from '@/components/data_presentation/SinglePerson';
+  import GenderDistributionInfo from '@/components/data_presentation/GenderDistributionInfo';
 
   export default {
     name: 'APIGetter',
-    components: { SinglePerson },
+    components: { GenderDistributionInfo, SinglePerson },
     data() {
       return {
         peopleData: [],
@@ -39,6 +41,22 @@
           .toLowerCase()));
       },
       peopleFilter(recordObject) {
+        switch (recordObject.gender) {
+        case 'male':
+          this.menCount++;
+          break;
+        case 'female':
+          this.womenCount++;
+          break;
+        case 'hermaphrodite':
+          this.menCount++;
+          this.womenCount++;
+          break;
+        default:
+          console.log(`${recordObject.name} is not a human or of non-binary gender`);
+          break;
+        }
+        this.peopleTotalCount++;
         return recordObject.gender !== 'n/a';
       },
     },
