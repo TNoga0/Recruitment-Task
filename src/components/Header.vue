@@ -16,6 +16,10 @@
   src: url('~@/assets/headerFont.ttf');
 }
 
+.header {
+  width: 100%;
+}
+
 .header-title {
   font-family: starWarsFont;
   color: white;
