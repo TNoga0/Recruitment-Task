@@ -18,7 +18,7 @@
   import { mapState } from 'vuex';
 
   export default {
-    name: 'SinglePerson',
+    name: 'PersonName',
     props: { personData: Object },
     data() {
       return { punctuationSymbols: [',', '-'] };
