@@ -1,9 +1,10 @@
 <template>
   <div class="api-getter">
-    <GenderDistributionInfo :men-count="menCount" :women-count="womenCount"/>
-    <SinglePerson v-for="person in peopleData"
-                  :key="person.url"
-                  :person-data="person"/>
+    <UnderlineLightsaber/>
+<!--    <GenderDistributionInfo :men-count="menCount" :women-count="womenCount"/>-->
+<!--    <SinglePerson v-for="person in peopleData"-->
+<!--                  :key="person.url"-->
+<!--                  :person-data="person"/>-->
   </div>
 </template>
 
@@ -11,10 +12,11 @@
   import { mapState } from 'vuex';
   import SinglePerson from '@/components/data_presentation/SinglePerson';
   import GenderDistributionInfo from '@/components/data_presentation/GenderDistributionInfo';
+  import UnderlineLightsaber from "@/components/data_presentation/UnderlineLightsaber";
 
   export default {
     name: 'APIGetter',
-    components: { GenderDistributionInfo, SinglePerson },
+    components: {UnderlineLightsaber, GenderDistributionInfo, SinglePerson },
     data() {
       return {
         peopleData: [],
