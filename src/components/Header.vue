@@ -20,8 +20,13 @@
   width: 100%;
 }
 
+p {
+  margin-top: 3vh;
+}
+
 .header-title {
   font-family: starWarsFont;
   color: white;
+  font-size: clamp(1.1rem, 5vw, 3rem);
 }
 </style>

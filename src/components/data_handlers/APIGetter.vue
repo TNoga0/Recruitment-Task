@@ -1,26 +1,24 @@
 <template>
   <div class="api-getter">
+    <GenderDistributionInfo/>
     <UnderlineLightsaber/>
-<!--    <GenderDistributionInfo :men-count="menCount" :women-count="womenCount"/>-->
-<!--    <SinglePerson v-for="person in peopleData"-->
-<!--                  :key="person.url"-->
-<!--                  :person-data="person"/>-->
+    <SinglePerson v-for="person in peopleData"
+                  :key="person.url"
+                  :person-data="person"/>
   </div>
 </template>
 
 <script>
-  import { mapState } from 'vuex';
+  import { mapMutations, mapState } from 'vuex';
   import SinglePerson from '@/components/data_presentation/SinglePerson';
   import GenderDistributionInfo from '@/components/data_presentation/GenderDistributionInfo';
-  import UnderlineLightsaber from "@/components/data_presentation/UnderlineLightsaber";
+  import UnderlineLightsaber from '@/components/data_presentation/UnderlineLightsaber';
 
   export default {
     name: 'APIGetter',
-    components: {UnderlineLightsaber, GenderDistributionInfo, SinglePerson },
+    components: { UnderlineLightsaber, GenderDistributionInfo, SinglePerson },
     data() {
       return {
-        peopleData: [],
-        peopleTotalCount: 0,
         menCount: 0,
         womenCount: 0,
       };
@@ -30,13 +28,14 @@
         this.$http.get(url)
           .then((response) => {
             this.filterData(response.data.results);
+            this.updateCounts([this.menCount, this.womenCount]);
             if (response.data.next !== null) this.getPeopleData(response.data.next);
           });
       },
       filterData(dataArray) {
         const nameFilteredData = dataArray.filter(this.nameFilter);
         const onlyPeopleData = nameFilteredData.filter(this.peopleFilter);
-        this.peopleData = this.peopleData.concat(onlyPeopleData);
+        this.updatePeopleData(onlyPeopleData);
       },
       nameFilter(recordObject) {
         return !(['l', 'n', 'c'].includes(recordObject.name.charAt(0)
@@ -58,18 +57,21 @@
           console.log(`${recordObject.name} is not a human or of non-binary gender`);
           break;
         }
-        this.peopleTotalCount++;
         return recordObject.gender !== 'n/a';
       },
+      ...mapMutations([
+        'updatePeopleData',
+        'updateCounts',
+      ]),
     },
     computed: {
       ...mapState([
         'apiUrl',
+        'peopleData',
       ]),
     },
     mounted() {
-      this.getPeopleData(this.apiUrl);
-      console.log(this.peopleData);
+      if (this.peopleData.length === 0) this.getPeopleData(this.apiUrl);
     },
   };
 </script>

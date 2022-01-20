@@ -1,15 +1,21 @@
 <template>
-  <div class="single-person" :style="cssVars">
-    <p class="dark-text-outline"
-       v-if="eyeColor === 'black'">
-      {{personData.name}}
-    </p>
-    <p v-else>{{personData.name}}</p>
+  <div class="single-person">
+    <div :class="{ 'lightsaber-effect': lightsaberToggled, 'no-effect': !lightsaberToggled }"
+         :style="cssVars">
+      <p class="dark-text-outline"
+         v-if="eyeColor === 'black'">
+        {{personData.name}}
+      </p>
+      <p v-else>
+        {{personData.name}}
+      </p>
+    </div>
   </div>
 </template>
 
 <script>
   import { eyeColors } from '@/components/data_handlers/replacement_data.json';
+  import { mapState } from 'vuex';
 
   export default {
     name: 'SinglePerson',
@@ -36,6 +42,12 @@
       cssVars() {
         return { '--color': this.eyeColor };
       },
+      someVar() {
+        return 'blue';
+      },
+      ...mapState([
+        'lightsaberToggled',
+      ]),
     },
   };
 </script>
@@ -48,15 +60,21 @@
   margin: auto;
   padding-top: 0.9vh;
   font-size: clamp(0.7rem, 7vw, 2rem);
-  color: var(--color);
-  /*text-shadow: 0 0 5px var(--color);*/
-  /*text-shadow:*/
-  /*  0 0 7px #fff,*/
-  /*  0 0 10px var(--color),*/
-  /*  0 0 20px var(--color);*/
-  /*color: white;*/
   width: 70vw;
   height: 4vh;
+}
+
+.no-effect {
+  color: var(--color);
+}
+
+.lightsaber-effect {
+  text-shadow:
+    0 0 5px #fff,
+    0 0 7px var(--color),
+    0 0 12px var(--color),
+    0 0 23px var(--color);
+  color: white;
 }
 
 .dark-text-outline {

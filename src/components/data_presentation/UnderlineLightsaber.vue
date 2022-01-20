@@ -1,15 +1,32 @@
 <template>
-  <div class="lightsaber">
+  <div class="lightsaber" :style="cssVars">
     <label class="hilt" for="saber-switch"/>
-    <input type="checkbox" id="saber-switch">
+    <input type="checkbox"
+           id="saber-switch"
+           v-on:click="toggleLightsaber">
     <div class="blade"/>
   </div>
 </template>
 
 <script>
-export default {
-  name: "UnderlineLightsaber",
-}
+  import { mapMutations, mapState } from 'vuex';
+
+  export default {
+    name: 'UnderlineLightsaber',
+    methods: {
+      ...mapMutations([
+        'toggleLightsaber',
+      ]),
+    },
+    computed: {
+      ...mapState([
+        'lightsaberToggled',
+      ]),
+      cssVars() {
+        return { '--saber-color': 'cyan' };
+      },
+    },
+  };
 </script>
 
 <style scoped>
@@ -46,10 +63,10 @@ export default {
   height: clamp(0.4rem,2.5vw,1rem);
   background-color: white;
   border-radius: 0 1vw 1vw 0;
-  box-shadow: inset 0 0 0.2rem limegreen,
-              0 0 0.6rem 3px limegreen,
-              0 0 1.1rem limegreen,
-              0 0 1.4rem 2px limegreen;
+  box-shadow: inset 0 0 0.2rem var(--saber-color),
+              0 0 0.6rem 3px var(--saber-color),
+              0 0 1.1rem var(--saber-color),
+              0 0 1.4rem 2px var(--saber-color);
 
   transition: transform 90ms ease-out;
   transform-origin: left;
@@ -57,7 +74,6 @@ export default {
 
 .lightsaber {
   display: flex;
-  margin: auto;
   justify-content: center;
   width: 100%;
 }
@@ -67,7 +83,6 @@ export default {
 #saber-switch:checked + .blade {
   transform: scaleX(1);
 }
-
 #saber-switch:not(:checked) + .blade{
   transform: scaleX(0);
 }
