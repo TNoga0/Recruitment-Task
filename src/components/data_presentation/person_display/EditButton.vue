@@ -11,8 +11,6 @@
   export default {
     name: 'EditButton',
     props: { id: String },
-    methods: {
-    },
   };
 </script>
 
@@ -25,7 +23,7 @@
 
 button {
   cursor: pointer;
-  width: clamp(3rem, 10vw, 10rem);
+  width: clamp(3rem, 12vw, 15rem);
   margin-right: clamp(0rem, 2vw, 1rem);
   height: 3.5vh;
   background-color: #3d3a3a;

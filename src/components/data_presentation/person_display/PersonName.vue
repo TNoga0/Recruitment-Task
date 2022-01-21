@@ -1,5 +1,5 @@
 <template>
-  <div class="person-name">
+<!--  <div class="person-name">-->
     <div :class="{ 'lightsaber-effect': lightsaberToggled, 'no-effect': !lightsaberToggled }"
          :style="cssVars">
       <p class="dark-text-outline"
@@ -10,7 +10,7 @@
         {{personData.name}}
       </p>
     </div>
-  </div>
+<!--  </div>-->
 </template>
 
 <script>
@@ -54,18 +54,18 @@
 
 <style scoped>
 
-.person-name {
-  margin: auto;
-  font-size: clamp(0.6rem, 6vw, 2rem);
-  width: 70vw;
-  height: 4vh;
+p {
+  margin: 0;
 }
 
-p {
-  margin-top: 0;
+.no-effect, .lightsaber-effect {
+  margin: auto;
+  font-size: clamp(0.6rem, 7vw, 2rem);
+  width: 70vw;
 }
 
 .no-effect {
+  display: inline-block;
   color: var(--color);
 }
 

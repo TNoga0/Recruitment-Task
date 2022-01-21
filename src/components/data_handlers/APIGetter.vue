@@ -30,7 +30,7 @@
           .then((response) => {
             this.filterData(response.data.results);
             this.updateCounts([this.menCount, this.womenCount]);
-            if (response.data.next !== null) this.getPeopleData(response.data.next);
+            if (response.data.next !== null && (this.womenCount + this.menCount <= 100)) this.getPeopleData(response.data.next);
           });
       },
       filterData(dataArray) {
