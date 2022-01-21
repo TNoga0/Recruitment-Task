@@ -2,9 +2,10 @@
   <div class="api-getter">
     <GenderDistributionInfo/>
     <UnderlineLightsaber/>
-    <SinglePerson v-for="person in peopleData"
-                  :key="person.url"
-                  :person-data="person"/>
+    <SinglePerson v-for="id in Object.keys(peopleData)"
+                  :key="id"
+                  :person-data="peopleData[id]"
+                  :person-i-d="id"/>
   </div>
 </template>
 
@@ -35,11 +36,20 @@
       filterData(dataArray) {
         const nameFilteredData = dataArray.filter(this.nameFilter);
         const onlyPeopleData = nameFilteredData.filter(this.peopleFilter);
-        this.updatePeopleData(onlyPeopleData);
+        const orderedData = this.addIDs(onlyPeopleData);
+        this.updatePeopleData(orderedData);
       },
       nameFilter(recordObject) {
         return !(['l', 'n', 'c'].includes(recordObject.name.charAt(0)
           .toLowerCase()));
+      },
+      addIDs(dataArray) {
+        let objectToReturn = {}
+        dataArray.forEach((dataObj) => {
+          const id = dataObj.url.split('/').at(-2);
+          objectToReturn[id] = dataObj
+        });
+        return objectToReturn;
       },
       peopleFilter(recordObject) {
         switch (recordObject.gender) {
@@ -71,7 +81,7 @@
       ]),
     },
     mounted() {
-      if (this.peopleData.length === 0) this.getPeopleData(this.apiUrl);
+      if (Object.keys(this.peopleData).length === 0) this.getPeopleData(this.apiUrl);
     },
   };
 </script>

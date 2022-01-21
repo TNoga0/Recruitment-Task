@@ -8,14 +8,19 @@ export default new Vuex.Store({
   state: {
     apiUrl: 'https://swapi.dev/api/people/',
     lightsaberToggled: false,
-    peopleData: [],
+    peopleData: {},
     menCount: 0,
     womenCount: 0,
   },
   plugins: [createPersistedState()],
   mutations: {
     toggleLightsaber(state) { state.lightsaberToggled = !state.lightsaberToggled; },
-    updatePeopleData(state, newData) { state.peopleData = state.peopleData.concat(newData); },
+    updatePeopleData(state, newData) {
+      Object.keys(newData).forEach(key => {
+        // Vue.set used for reactivity
+        Vue.set(state.peopleData, key, newData[key]);
+      });
+    },
     updateCounts(state, [men, women]) { state.menCount = men; state.womenCount = women; },
   },
   actions: {},

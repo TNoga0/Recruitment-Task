@@ -1,7 +1,7 @@
 <template>
   <div class="single-person">
     <PersonName :person-data="personData"/>
-    <EditButton/>
+    <EditButton :id="personID"/>
   </div>
 </template>
 
@@ -12,7 +12,10 @@
   export default {
     name: 'SinglePerson',
     components: { EditButton, PersonName },
-    props: { personData: Object },
+    props: {
+      personData: Object,
+      personID: String,
+    },
   };
 </script>
 
@@ -24,7 +27,7 @@
   background-color: #332f2f;
   border-radius: 15px;
   width: 90%;
-  height: clamp(0.9rem, 9vw, 2.8rem);
+  min-height: clamp(0.9rem, 9vw, 2.8rem);
 }
 
 </style>

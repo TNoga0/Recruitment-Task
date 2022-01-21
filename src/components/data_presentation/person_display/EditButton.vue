@@ -1,11 +1,19 @@
 <template>
   <div class="edit-button">
-    <button type="button">Edit</button>
+    <router-link v-if="id !== undefined" :to="{ name: 'Edit', params: { id: id } }">
+      <button type="button"
+              v-text="'Edit'"/>
+    </router-link>
   </div>
 </template>
 
 <script>
-  export default { name: 'EditButton' };
+  export default {
+    name: 'EditButton',
+    props: { id: String },
+    methods: {
+    },
+  };
 </script>
 
 <style scoped>
@@ -16,7 +24,7 @@
 }
 
 button {
-  width: clamp(5rem, 10vw, 10rem);
+  width: clamp(3rem, 10vw, 10rem);
   margin-right: clamp(0rem, 2vw, 1rem);
   height: 3.5vh;
   background-color: #484646;

@@ -1,15 +1,14 @@
 <template>
   <div id="app">
     <Header/>
-    <APIGetter/>
+    <router-view/>
   </div>
 </template>
 
 <script>
   import Header from '@/components/Header';
-  import APIGetter from '@/components/data_handlers/APIGetter';
 
-  export default { components: { APIGetter, Header } };
+  export default { components: { Header } };
 </script>
 
 <style>
