@@ -39,6 +39,9 @@
     },
     methods: {
       getAdditionalData(urls, property) {
+        /**
+         * Pulls additional data from api and replaces the corresponding ones in the copied object.
+         */
         if (Array.isArray(urls)) {
           let results = [];
           urls.forEach(url => {
@@ -71,19 +74,36 @@
     },
     filters: {
       prettyProperty(property) {
+        /**
+         * A filter to format People object keys to make it better-looking.
+         */
         let splitProperty = property.split('_').join(' ');
         return splitProperty.charAt(0).toUpperCase() + splitProperty.slice(1);
       },
     },
     beforeMount() {
+      /**
+       * Making a copy of vuex state containing people data to operate on it.
+       * Vehicles, Spaceships etc will be pulled from api but I'd rather keep the initially
+       * pulled data intact (i.e. keep urls instead of names)
+       */
       this.person = Object.assign({}, this.peopleData[this.id]);
     },
     mounted() {
-      this.getAdditionalData(this.person.homeworld, 'homeworld');
-      this.getAdditionalData(this.person.species, 'species');
-      this.getAdditionalData(this.person.starships, 'starships');
-      this.getAdditionalData(this.person.vehicles, 'vehicles');
-      this.getAdditionalData(this.person.films, 'films');
+      /**
+       * I've decided to keep these separate for the sake of easier testing.
+       * These methods can be easily squeezed into one.
+       *
+       * notice: The condition in 'if' statement is deliberately duplicated because if I tried to make
+       * it a computed one or in a method, the v-model in input didn't work. I don't exactly know why.
+       */
+      if (this.person.birth_year === '19BBY' && this.person.gender === 'female') {
+        this.getAdditionalData(this.person.homeworld, 'homeworld');
+        this.getAdditionalData(this.person.species, 'species');
+        this.getAdditionalData(this.person.starships, 'starships');
+        this.getAdditionalData(this.person.vehicles, 'vehicles');
+        this.getAdditionalData(this.person.films, 'films');
+      }
     },
   };
 </script>

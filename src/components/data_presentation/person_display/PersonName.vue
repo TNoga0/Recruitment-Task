@@ -1,5 +1,4 @@
 <template>
-<!--  <div class="person-name">-->
     <div :class="{ 'lightsaber-effect': lightsaberToggled, 'no-effect': !lightsaberToggled }"
          :style="cssVars">
       <p class="dark-text-outline"
@@ -10,7 +9,6 @@
         {{personData.name}}
       </p>
     </div>
-<!--  </div>-->
 </template>
 
 <script>
@@ -25,6 +23,12 @@
     },
     computed: {
       eyeColor() {
+        /**
+         * It's a bit ugly and hardcode-ish way to properly extract eye color. I've wanted to use
+         * standard CSS colors, so some of them, like hazel, had to be replaced. The swaps are hardcoded
+         * in JSON file. Also, some colors contained , or - marks and there were two colors present.
+         * I've decided to take only the first one.
+         */
         const { eye_color, ...rest } = this.personData;
         let symbolSplits = [];
         let colorToReturn = '';
