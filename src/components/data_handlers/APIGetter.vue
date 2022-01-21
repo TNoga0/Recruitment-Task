@@ -2,7 +2,7 @@
   <div class="api-getter">
     <GenderDistributionInfo/>
     <UnderlineLightsaber/>
-    <PersonName v-for="person in peopleData"
+    <SinglePerson v-for="person in peopleData"
                   :key="person.url"
                   :person-data="person"/>
   </div>
@@ -10,13 +10,13 @@
 
 <script>
   import { mapMutations, mapState } from 'vuex';
-  import PersonName from '@/components/data_presentation/PersonName';
   import GenderDistributionInfo from '@/components/data_presentation/GenderDistributionInfo';
   import UnderlineLightsaber from '@/components/data_presentation/UnderlineLightsaber';
+  import SinglePerson from '@/components/data_presentation/person_display/SinglePerson';
 
   export default {
     name: 'APIGetter',
-    components: { UnderlineLightsaber, GenderDistributionInfo, PersonName },
+    components: {SinglePerson, UnderlineLightsaber, GenderDistributionInfo },
     data() {
       return {
         menCount: 0,

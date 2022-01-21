@@ -76,6 +76,7 @@
   display: flex;
   justify-content: center;
   width: 100%;
+  margin-bottom: 2.5rem;
 }
 
 /* Turn lightsaber on/off */

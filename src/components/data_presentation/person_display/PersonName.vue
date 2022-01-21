@@ -1,5 +1,5 @@
 <template>
-  <div class="single-person">
+  <div class="person-name">
     <div :class="{ 'lightsaber-effect': lightsaberToggled, 'no-effect': !lightsaberToggled }"
          :style="cssVars">
       <p class="dark-text-outline"
@@ -54,14 +54,15 @@
 
 <style scoped>
 
-.single-person {
-  display: flex;
-  justify-content: space-around;
+.person-name {
   margin: auto;
-  padding-top: 0.9vh;
-  font-size: clamp(0.7rem, 7vw, 2rem);
+  font-size: clamp(0.6rem, 6vw, 2rem);
   width: 70vw;
   height: 4vh;
+}
+
+p {
+  margin-top: 0;
 }
 
 .no-effect {
