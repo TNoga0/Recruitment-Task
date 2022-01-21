@@ -24,7 +24,7 @@
 .single-person {
   display: flex;
   margin: auto auto 1.5vh auto;
-  background-color: #332f2f;
+  background-color: #484242;
   border-radius: 15px;
   width: 90%;
   min-height: clamp(0.9rem, 9vw, 2.8rem);

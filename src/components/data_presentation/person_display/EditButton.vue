@@ -24,10 +24,11 @@
 }
 
 button {
+  cursor: pointer;
   width: clamp(3rem, 10vw, 10rem);
   margin-right: clamp(0rem, 2vw, 1rem);
   height: 3.5vh;
-  background-color: #484646;
+  background-color: #3d3a3a;
   color: white;
   border: none;
   font-size: clamp(1rem, 2vh, 1.5rem);
