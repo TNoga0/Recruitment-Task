@@ -7,12 +7,12 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: () => import('@/components/data_handlers/APIGetter'),
+    component: () => import('@/views/APIGetter'),
   },
   {
     path: '/edit/:id',
     name: 'Edit',
-    component: () => import('@/components/data_presentation/person_display/EditPage.vue'),
+    component: () => import('@/views/EditPage'),
   },
 ];
 
